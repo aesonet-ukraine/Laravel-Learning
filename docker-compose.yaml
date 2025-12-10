@@ -43,11 +43,7 @@ services:
         networks:
             - sail
         healthcheck:
-            test:
-                - CMD
-                - mysqladmin
-                - ping
-                - '-p${DB_PASSWORD}'
+            test: ["CMD", "mysqladmin", "ping", '-p${DB_PASSWORD}']
             retries: 3
             timeout: 5s
     redis:
@@ -59,10 +55,7 @@ services:
         networks:
             - sail
         healthcheck:
-            test:
-                - CMD
-                - redis-cli
-                - ping
+            test: ["CMD", "redis-cli", "ping"]
             retries: 3
             timeout: 5s
     mailpit:
