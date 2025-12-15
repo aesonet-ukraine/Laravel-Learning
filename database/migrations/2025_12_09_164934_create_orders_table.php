@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        if(Schema::hasTable('orders')){
+        if (Schema::hasTable('orders')) {
             Schema::dropIfExists('orders');
         }
         Schema::create('orders', function (Blueprint $table) {

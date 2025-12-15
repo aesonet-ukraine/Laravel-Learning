@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        if(Schema::hasTable('products')){
+        if (Schema::hasTable('products')) {
             Schema::dropIfExists('products');
         }
         Schema::create('products', function (Blueprint $table) {
@@ -26,7 +26,6 @@ return new class extends Migration
             $table->text('thumbnail')->nullable();
             $table->softDeletes();
             $table->timestamps();
-
 
             $table->index(['slug', 'deleted_at']);
             $table->index(['title', 'deleted_at']);

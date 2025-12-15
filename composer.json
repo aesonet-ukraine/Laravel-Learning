@@ -6,7 +6,7 @@
     "keywords": ["laravel", "framework"],
     "license": "MIT",
     "require": {
-        "php": "^8.2",
+        "php": "^8.4",
         "laravel/framework": "^12.0",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.10.1",
@@ -35,6 +35,8 @@
         }
     },
     "scripts": {
+        "larastan": "./vendor/bin/phpstan analyse --memory-limit=2G",
+        "larastan-baseline": "./vendor/bin/phpstan analyse --generate-baseline",
         "setup": [
             "composer install",
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
