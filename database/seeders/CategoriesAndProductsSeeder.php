@@ -13,9 +13,9 @@ class CategoriesAndProductsSeeder extends Seeder
      */
     public function run(): void
     {
-
-        DB::table('categories')->truncate();
-        DB::table('products')->truncate();
+        DB::table('category_product')->delete();
+        DB::table('categories')->delete();
+        DB::table('products')->delete();
 
         Category::factory(2)->create();
         Category::factory(5)->hasProducts(rand(10, 50))->create();
