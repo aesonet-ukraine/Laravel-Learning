@@ -3,7 +3,9 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Smknstd\FakerPicsumImages\FakerPicsumImagesProvider;
 
 class ProductFactory extends Factory
 {
@@ -20,7 +22,7 @@ class ProductFactory extends Factory
             'price' => $this->faker->randomFloat(2, 1, 200),
             'discount' => $this->faker->boolean() ? rand(10, 65) : null,
             'quantity' => $this->faker->numberBetween(0, 50),
-            'thumbnail' => $this->faker->imageUrl(),
+            'thumbnail' => $this->generateThumbnail($slug),
         ];
     }
 
@@ -30,5 +32,22 @@ class ProductFactory extends Factory
             'title' => $title,
             'slug' => Str::slug($title, '-'),
         ]);
+    }
+    protected function generateThumbnail(string $slug): string
+    {
+        $dirName = 'faker/products/' . $slug;
+
+        $faker = \Faker\Factory::create();
+        $faker->addProvider(new FakerPicsumImagesProvider($faker));
+        if(! Storage::exists($dirName)) {
+            Storage::createDirectory($dirName);
+        }
+        /*
+         * @var FakerPicsumImagesProvider $faker
+         */
+        return $dirName . '/' . $faker->image(
+                dir: Storage::path($dirName),
+                fullPath: false,
+            );
     }
 }
