@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         if (Schema::hasTable('orders')) {
-            Schema::dropIfExists('orders');
+            return;
         }
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
@@ -20,8 +20,9 @@ return new class extends Migration
                 ->constrained('users')
                 ->cascadeOnDelete();
             $table->foreignId('status_id')
+                ->nullable()
                 ->constrained('order_statuses')
-                ->cascadeOnDelete();
+                ->nullOnDelete();
             $table->string('name', 30);
             $table->string('surname', 30);
             $table->string('email', 50);
@@ -30,6 +31,8 @@ return new class extends Migration
             $table->string('address', 100);
             $table->double('total')->startingValue(1);
             $table->timestamps();
+
+            $table->softDeletes();
         });
     }
 
