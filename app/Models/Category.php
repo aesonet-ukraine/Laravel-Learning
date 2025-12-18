@@ -17,7 +17,6 @@ class Category extends Model
     /*
      * @return BelongsToMany<Product>
      */
-    use HasFactory;
     public function products(): BelongsToMany
     {
         return $this->belongsToMany(Product::class);
