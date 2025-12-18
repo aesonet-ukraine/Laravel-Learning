@@ -1,0 +1,30 @@
+name: Pint
+
+on:
+    pull_request:
+      types: [opened, reopened, edited, synchronize]
+
+jobs:
+  pint:
+    name: Pint
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix:
+          php: [8.5]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+
+      - name: Set up php
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: json, dom, curl, mbstring, libxml
+          coverage: none
+
+      - name: Install Pint
+        run: composer global require laravel/pint
+
+      - name: Run Pint checks
+        run: pint --test -vvv

@@ -12,10 +12,8 @@ class AuthController extends Controller
      */
     public function register(Request $request)
     {
-        //
+        dd($request->all());
     }
-    public function login(Request $request)
-    {
-        //
-    }
+
+    public function login(Request $request) {}
 }

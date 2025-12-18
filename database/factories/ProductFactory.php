@@ -4,6 +4,8 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Storage;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Str;
 use Smknstd\FakerPicsumImages\FakerPicsumImagesProvider;
 
@@ -33,21 +35,24 @@ class ProductFactory extends Factory
             'slug' => Str::slug($title, '-'),
         ]);
     }
+
     protected function generateThumbnail(string $slug): string
     {
-        $dirName = 'faker/products/' . $slug;
+        $dirName = 'faker/products/'.$slug;
 
         $faker = \Faker\Factory::create();
         $faker->addProvider(new FakerPicsumImagesProvider($faker));
-        if(! Storage::exists($dirName)) {
+        if (! Storage::exists($dirName)) {
             Storage::createDirectory($dirName);
         }
+
         /*
          * @var FakerPicsumImagesProvider $faker
          */
-        return $dirName . '/' . $faker->image(
-                dir: Storage::path($dirName),
-                fullPath: false,
-            );
+        return $dirName.'/'.$faker->image(
+            dir: Storage::path($dirName),
+            fullPath: false,
+        );
+
     }
 }
