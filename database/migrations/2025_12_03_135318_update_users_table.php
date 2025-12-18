@@ -15,7 +15,8 @@ return new class extends Migration
             return;
         }
         Schema::table('users', function (Blueprint $table) {
-            $table->string('phone', 13)->nullable()->after('email')->unique();
+            $table->string('phone', 13)->after('email')->unique();
+            $table->softDeletes();
         });
     }
 

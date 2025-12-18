@@ -12,12 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         if (Schema::hasTable('order_product_table')) {
-            Schema::dropIfExists('order_product_table');
+            return;
         }
         Schema::create('order_product_table', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('product_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('order_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('product_id')
+                ->constrained()
+                ->nullOnDelete();
+            $table->foreignId('order_id')
+                ->constrained()
+                ->cascadeOnDelete();
             $table->string('title', 50);
             $table->float('single_price')->unsigned()->startingValue(1);
             $table->integer('quantity')->unsigned();

@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         if (Schema::hasTable('category_product')) {
-            Schema::dropIfExists('category_product');
+            return;
         }
         Schema::create('category_product', function (Blueprint $table) {
             $table->id();

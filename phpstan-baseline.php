@@ -40,14 +40,14 @@ $ignoreErrors[] = [
     'path' => __DIR__.'/app/Models/Image.php',
 ];
 $ignoreErrors[] = [
-    'message' => '#^Method App\\\\Models\\\\Order\\:\\:getUserOrders\\(\\) return type with generic class Illuminate\\\\Database\\\\Eloquent\\\\Relations\\\\HasMany does not specify its types\\: TRelatedModel, TDeclaringModel$#',
-    'identifier' => 'missingType.generics',
+    'message' => '#^Method App\\\\Models\\\\Order\\:\\:getUserOrders\\(\\) should return Illuminate\\\\Database\\\\Eloquent\\\\Relations\\\\BelongsToMany\\<App\\\\Models\\\\User, App\\\\Models\\\\Order, Illuminate\\\\Database\\\\Eloquent\\\\Relations\\\\Pivot, \'pivot\'\\> but returns Illuminate\\\\Database\\\\Eloquent\\\\Relations\\\\BelongsToMany\\<App\\\\Models\\\\User, \\$this\\(App\\\\Models\\\\Order\\), Illuminate\\\\Database\\\\Eloquent\\\\Relations\\\\Pivot, \'pivot\'\\>\\.$#',
+    'identifier' => 'return.type',
     'count' => 1,
     'path' => __DIR__.'/app/Models/Order.php',
 ];
 $ignoreErrors[] = [
-    'message' => '#^Method App\\\\Models\\\\Order\\:\\:products\\(\\) return type with generic class Illuminate\\\\Database\\\\Eloquent\\\\Relations\\\\HasMany does not specify its types\\: TRelatedModel, TDeclaringModel$#',
-    'identifier' => 'missingType.generics',
+    'message' => '#^Method App\\\\Models\\\\Order\\:\\:products\\(\\) should return Illuminate\\\\Database\\\\Eloquent\\\\Relations\\\\BelongsToMany\\<App\\\\Models\\\\Product, App\\\\Models\\\\Order, Illuminate\\\\Database\\\\Eloquent\\\\Relations\\\\Pivot, \'pivot\'\\> but returns Illuminate\\\\Database\\\\Eloquent\\\\Relations\\\\BelongsToMany\\<App\\\\Models\\\\Product, \\$this\\(App\\\\Models\\\\Order\\), Illuminate\\\\Database\\\\Eloquent\\\\Relations\\\\Pivot, \'pivot\'\\>\\.$#',
+    'identifier' => 'return.type',
     'count' => 1,
     'path' => __DIR__.'/app/Models/Order.php',
 ];
@@ -62,6 +62,12 @@ $ignoreErrors[] = [
     'identifier' => 'missingType.generics',
     'count' => 1,
     'path' => __DIR__.'/app/Models/Product.php',
+];
+$ignoreErrors[] = [
+    'message' => '#^Method App\\\\Models\\\\User\\:\\:orders\\(\\) should return Illuminate\\\\Database\\\\Eloquent\\\\Relations\\\\HasMany\\<App\\\\Models\\\\Order, App\\\\Models\\\\User\\> but returns Illuminate\\\\Database\\\\Eloquent\\\\Relations\\\\HasMany\\<App\\\\Models\\\\Order, \\$this\\(App\\\\Models\\\\User\\)\\>\\.$#',
+    'identifier' => 'return.type',
+    'count' => 1,
+    'path' => __DIR__.'/app/Models/User.php',
 ];
 $ignoreErrors[] = [
     'message' => '#^Call to an undefined method Database\\\\Factories\\\\CategoryFactory\\:\\:hasProducts\\(\\)\\.$#',
