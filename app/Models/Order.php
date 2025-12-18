@@ -2,18 +2,29 @@
 
 namespace App\Models;
 
+use Database\Factories\OrderFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Order extends Model
 {
-    public function products(): HasMany
+    /** @use HasFactory<OrderFactory> */
+    use HasFactory;
+
+    /**
+     * @return BelongsToMany<Product, Order>
+     */
+    public function products(): BelongsToMany
     {
-        return $this->hasMany(Product::class);
+        return $this->belongsToMany(Product::class);
     }
 
-    public function getUserOrders(): HasMany
+    /**
+     * @return BelongsToMany<User, Order>
+     */
+    public function getUserOrders(): BelongsToMany
     {
-        return $this->hasMany(User::class, 'user_id');
+        return $this->belongsToMany(User::class);
     }
 }

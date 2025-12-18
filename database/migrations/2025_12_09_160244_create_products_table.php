@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        if(Schema::hasTable('products')){
-            Schema::dropIfExists('products');
+        if (Schema::hasTable('products')) {
+            return;
         }
         Schema::create('products', function (Blueprint $table) {
             $table->id();
@@ -20,13 +20,12 @@ return new class extends Migration
             $table->string('slug');
             $table->string('SKU', 15)->unique();
             $table->text('description')->nullable();
-            $table->float('price')->unsigned()->startingValue(1.00);
+            $table->float('price')->unsigned()->startingValue(1);
             $table->unsignedTinyInteger('discount')->nullable()->startingValue(0);
             $table->unsignedSmallInteger('quantity')->default(0);
             $table->text('thumbnail')->nullable();
             $table->softDeletes();
             $table->timestamps();
-
 
             $table->index(['slug', 'deleted_at']);
             $table->index(['title', 'deleted_at']);

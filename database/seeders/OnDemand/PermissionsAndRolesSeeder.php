@@ -24,40 +24,40 @@ class PermissionsAndRolesSeeder extends Seeder
             ...OrderEnum::values(),
             ...ProductEnum::values(),
             ...CategoryEnum::values(),
-            ...UserEnum::values()
+            ...UserEnum::values(),
         ];
         $guard = config('auth.defaults.guard', 'web');
         foreach ($permissions as $permission) {
-          Permission::findOrCreate($permission, $guard);
+            Permission::findOrCreate($permission, $guard);
         }
         $this->createRoleWithPermission(RolesEnum::USER, AccountEnum::values());
         $this->deleteRoleWithPermission(RolesEnum::USER, AccountEnum::values());
-
 
         $this->createRoleWithPermission(RolesEnum::MODERATOR, [
             ...OrderEnum::values(),
             ...ProductEnum::values(),
             ...CategoryEnum::values(),
-            ...UserEnum::values()
+            ...UserEnum::values(),
         ]);
         $this->createRoleWithPermission(RolesEnum::SELLER, [
             ...OrderEnum::values(),
         ]);
         $this->createRoleWithPermission(RolesEnum::ADMIN);
     }
+
     protected function createRoleWithPermission(RolesEnum $role, ?array $permissions = null): void
     {
-        if(! Role::where("name", $role)->exists()) {
-            Role::create(["name" => $role])
+        if (! Role::where('name', $role)->exists()) {
+            Role::create(['name' => $role])
                 ->givePermissionTo($permissions ?? Permission::all());
         }
     }
+
     protected function deleteRoleWithPermission(RolesEnum $role, ?array $permissions = null): void
     {
-        if(Role::where("name", $role)->exists()) {
+        if (Role::where('name', $role)->exists()) {
             Role::findByName($role->value)
                 ->revokePermissionTo($permissions ?? Permission::all());
         }
     }
-
 }

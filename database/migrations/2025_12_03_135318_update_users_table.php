@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        if(Schema::hasColumn('users', 'phone')) {
+        if (Schema::hasColumn('users', 'phone')) {
             return;
         }
         Schema::table('users', function (Blueprint $table) {
-            $table->string('phone', 13)->nullable()->after('email')->unique();
+            $table->string('phone', 13)->after('email')->unique();
+            $table->softDeletes();
         });
     }
 
@@ -24,7 +25,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        if(Schema::hasColumn('users', 'phone')) {
+        if (Schema::hasColumn('users', 'phone')) {
             Schema::table('users', function (Blueprint $table) {
                 $table->dropColumn('phone');
             });

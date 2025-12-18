@@ -7,7 +7,7 @@ trait Values
     /**
      * Get all values of the enum cases.
      *
-     * @return array <Integer, string>
+     * @return array <int, string>
      */
     public static function values(): array
     {
