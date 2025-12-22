@@ -12,12 +12,10 @@ jobs:
       db:
         image: mysql:8.0
         env:
-          MYSQL_DB_CONNECTION: mysql
-          MYSQL_DB_HOST: 127.0.0.1
-          MYSQL_DB_PORT: 3306
-          MYSQL_DB_DATABASE: laravel
-          MYSQL_DB_USERNAME: sail
-          MYSQL_DB_PASSWORD: password
+          MYSQL_DATABASE: laravel
+          MYSQL_USER: sail
+          MYSQL_PASSWORD: password
+          MYSQL_ROOT_PASSWORD: root
         ports:
           - 3306:3306
         options: >-
