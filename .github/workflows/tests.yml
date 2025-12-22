@@ -1,4 +1,4 @@
-name: Pint
+name: Tests
 
 on:
     pull_request:
@@ -46,7 +46,9 @@ jobs:
         run: php artisan key:generate
 
       - name: Directory permissions
-        run: chmod -R 777 storage bootstrap/cache
+        run:
+          sudo chmod -R 777 storage
+          sudo chmod -R 777 bootstrap/cache
 
       - name: Run tests
         env:
