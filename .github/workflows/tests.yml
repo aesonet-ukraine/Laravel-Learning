@@ -50,6 +50,14 @@ jobs:
           mkdir -p storage/framework/{cache,views,sessions}
           chmod -R 775 storage bootstrap/cache
 
+      - name: Wait for MySQL
+        run: |
+          sudo apt-get install -y mysql-client
+          until mysqladmin ping -h db --silent; do
+            echo "Waiting for MySQL..."
+            sleep 1
+          done
+
       - name: Run tests
         env:
           DB_CONNECTION: mysql
