@@ -46,9 +46,9 @@ jobs:
         run: php artisan key:generate
 
       - name: Directory permissions
-        run:
-          sudo chmod -R 777 storage
-          sudo chmod -R 777 bootstrap/cache
+        run: |
+          chmod -R 777 storage
+          chmod -R 777 bootstrap/cache
 
       - name: Run tests
         env:
