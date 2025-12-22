@@ -3,9 +3,9 @@
 use App\Http\Controllers\Api\AuthController;
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('auth')->group(function () {
-    Route::post('auth/register', [AuthController::class, 'register'])
+Route::prefix('auth')->middleware('access-token')->group(function () {
+    Route::post('register', [AuthController::class, 'register'])
         ->name('register');
-    Route::post('auth/login', [AuthController::class, 'login'])
+    Route::post('login', [AuthController::class, 'login'])
         ->name('login');
 });
