@@ -38,4 +38,5 @@ return [
         'email' => env('ADMIN_EMAIL'),
         'password' => env('ADMIN_PASSWORD'),
     ],
+    'access_token' => env('ACCESS_TOKEN'),
 ];

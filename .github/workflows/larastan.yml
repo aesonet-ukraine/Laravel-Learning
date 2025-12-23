@@ -1,0 +1,30 @@
+name: Larastan
+
+on:
+    pull_request:
+      types: [opened, reopened, edited, synchronize]
+
+jobs:
+  larastan:
+    name: Larastan
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix:
+          php: [8.5]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+
+      - name: Set up php
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: json, dom, curl, mbstring, libxml
+          coverage: none
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress --no-suggest --no-interaction --no-scripts --no-ansi
+
+      - name: Run Larastan
+        run: ./vendor/bin/phpstan analyse --memory-limit=2G
