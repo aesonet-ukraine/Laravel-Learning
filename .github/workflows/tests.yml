@@ -42,7 +42,10 @@ jobs:
           php-version: ${{ matrix.php }}
           extensions: json, dom, curl, mbstring, libxml
           coverage: none
-
+      - name: Set up MySQL
+        run: |
+          sudo /etc/init.d/mysql start
+          mysql -e 'CREATE DATABASE ${{ env.DB_DATABASE }};' -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
       - name: Copy .env file
         run: php -r "file_exists('.env') || copy('.env.action', '.env');"
 
@@ -63,10 +66,7 @@ jobs:
       - name: Run seeds
         run: php artisan db:seed --class="OnDemandSeeder"
 
-      - name: Set up MySQL
-        run: |
-          sudo /etc/init.d/mysql start
-          mysql -e 'CREATE DATABASE ${{ env.DB_DATABASE }};' -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
+
 
       - name: Run tests
         run: php artisan test
