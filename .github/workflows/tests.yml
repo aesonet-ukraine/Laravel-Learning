@@ -1,79 +1,64 @@
 name: Tests
 
 on:
-    pull_request:
-      types: [opened, reopened, edited, synchronize]
+  pull_request:
+    types: [opened, reopened, edited, synchronize]
 
 jobs:
   tests:
     name: Tests
     runs-on: ubuntu-latest
-    services:
-      db:
-        image: mysql:8.0
-        env:
-          MYSQL_ROOT_PASSWORD: root
-          MYSQL_DATABASE: laravel
-        options: >-
-          --health-cmd="mysqladmin ping --silent"
-          --health-interval=10s
-          --health-timeout=5s
-          --health-retries=3
     strategy:
       fail-fast: true
       matrix:
-          php: [8.5]
+        php: [ 8.5 ]
+    services:
+      db:
+        image: postgres:18
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: laravel
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
     env:
-      DB_CONNECTION: mysql
-      DB_HOST: db
-      DB_PORT: 3306
+      DB_CONNECTION: pgsql
+      DB_HOST: localhost
+      DB_PORT: 5432
       DB_DATABASE: laravel
-      DB_USERNAME: root
-      DB_PASSWORD: root
-      DB_SOCKET: ""
+      DB_USERNAME: postgres
+      DB_PASSWORD: postgres
     steps:
-      - name: Checkout code
+      - name: Checkout step
         uses: actions/checkout@v5
 
-      - name: Set up php
+      - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: ${{ matrix.php }}
-          extensions: json, dom, curl, mbstring, libxml
+          php-version: ${{matrix.php}}
+          extensions: json, dom, curl, libxml, mbstring
           coverage: none
-      - name: Install MySQL client
-        run: sudo apt-get update && sudo apt-get install -y default-mysql-client
-
-      - name: Copy .env file
+      - name: Copy .env
         run: php -r "file_exists('.env') || copy('.env.action', '.env');"
 
-      - name: Install dependencies
-        run: composer install --prefer-dist --no-progress --no-suggest --no-interaction --no-scripts --no-ansi
+      - name: Install depencedies
+        run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
 
-      - name: Generate application key
+      - name: Generate APP key
         run: php artisan key:generate
 
       - name: Directory permissions
-        run: |
-          mkdir -p storage/framework/{cache,views,sessions}
-          chmod -R 775 storage bootstrap/cache
-      - name: Wait for MySQL
-        run: |
-          for i in {1..30}; do
-            if mysql -h db -u root -proot -e 'SELECT 1' laravel > /dev/null 2>&1; then
-              echo "MySQL is up!"
-              break
-            fi
-            echo "Waiting for MySQL..."
-            sleep 2
-          done
-      - name: Artisan migrate
+        run: chmod -R 777 storage bootstrap/cache
+
+      - name: Run migrations
         run: php artisan migrate
 
       - name: Run seeds
         run: php artisan db:seed --class="OnDemandSeeder"
 
-
-
-      - name: Run tests
+      - name: Tests execution
         run: php artisan test
