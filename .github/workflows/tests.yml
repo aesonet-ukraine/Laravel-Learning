@@ -50,6 +50,18 @@ jobs:
           mkdir -p storage/framework/{cache,views,sessions}
           chmod -R 775 storage bootstrap/cache
 
+      - name: Wait for MySQL DNS and service
+        run: |
+          echo "Waiting for MySQL service..."
+          for i in {1..30}; do
+            if mysqladmin ping -h db -u root -ppassword --silent; then
+              echo "MySQL is ready"
+              break
+            fi
+            echo "Waiting..."
+            sleep 2
+          done
+
       - name: Run tests
         env:
           DB_CONNECTION: mysql
