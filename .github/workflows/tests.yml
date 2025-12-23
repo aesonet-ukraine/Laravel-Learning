@@ -41,6 +41,8 @@ jobs:
           php-version: ${{ matrix.php }}
           extensions: json, dom, curl, mbstring, libxml
           coverage: none
+      - name: Install MySQL client
+        run: sudo apt-get update && sudo apt-get install -y default-mysql-client
 
       - name: Copy .env file
         run: php -r "file_exists('.env') || copy('.env.action', '.env');"
@@ -55,7 +57,16 @@ jobs:
         run: |
           mkdir -p storage/framework/{cache,views,sessions}
           chmod -R 775 storage bootstrap/cache
-
+      - name: Wait for MySQL
+        run: |
+          for i in {1..30}; do
+            if mysql -h db -u root -proot -e 'SELECT 1' laravel > /dev/null 2>&1; then
+              echo "MySQL is up!"
+              break
+            fi
+            echo "Waiting for MySQL..."
+            sleep 2
+          done
       - name: Artisan migrate
         run: php artisan migrate
 
