@@ -25,6 +25,13 @@ jobs:
       fail-fast: true
       matrix:
           php: [8.4]
+    env:
+      DB_CONNECTION: mysql
+      DB_HOST: localhost
+      DB_PORT: 3306
+      DB_DATABASE: laravel
+      DB_USERNAME: root
+      DB_PASSWORD: password
     steps:
       - name: Checkout code
         uses: actions/checkout@v5
@@ -50,24 +57,11 @@ jobs:
           mkdir -p storage/framework/{cache,views,sessions}
           chmod -R 775 storage bootstrap/cache
 
-      - name: Wait for MySQL DNS and service
-        run: |
-          echo "Waiting for MySQL service..."
-          for i in {1..30}; do
-            if mysqladmin ping -h db -u root -p password --silent; then
-              echo "MySQL is ready"
-              break
-            fi
-            echo "Waiting..."
-            sleep 2
-          done
+      - name: Artisan migrate
+        run: php artisan migrate
+
+      - name: Run seeds
+        run: php artisan db:seed --class="OnDemandSeeder"
 
       - name: Run tests
-        env:
-          DB_CONNECTION: mysql
-          DB_HOST: db
-          DB_PORT: 3306
-          DB_DATABASE: laravel
-          DB_USERNAME: root
-          DB_PASSWORD: password
         run: php artisan test
