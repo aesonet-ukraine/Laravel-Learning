@@ -14,8 +14,6 @@ jobs:
         env:
           MYSQL_ROOT_PASSWORD: password
           MYSQL_DATABASE: laravel
-        ports:
-          - 3306:3306
         options: >-
           --health-cmd="mysqladmin ping --silent"
           --health-interval=10s
@@ -30,8 +28,9 @@ jobs:
       DB_HOST: localhost
       DB_PORT: 3306
       DB_DATABASE: laravel
-      DB_USER: root
+      DB_USERNAME: root
       DB_PASSWORD: password
+      DB_SOCKET: ""
     steps:
       - name: Checkout code
         uses: actions/checkout@v5
@@ -45,7 +44,7 @@ jobs:
       - name: Set up MySQL
         run: |
           sudo /etc/init.d/mysql start
-          mysql -e 'CREATE DATABASE ${{ env.DB_DATABASE }};' -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
+          mysql -e 'CREATE DATABASE ${{ env.DB_DATABASE }};' -u${{ env.DB_USERNAME }} -p${{ env.DB_PASSWORD }}
       - name: Copy .env file
         run: php -r "file_exists('.env') || copy('.env.action', '.env');"
 
