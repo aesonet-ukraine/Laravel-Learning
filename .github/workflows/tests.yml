@@ -54,7 +54,7 @@ jobs:
         run: |
           echo "Waiting for MySQL service..."
           for i in {1..30}; do
-            if mysqladmin ping -h db -u root -ppassword --silent; then
+            if mysqladmin ping -h db -u root -p password --silent; then
               echo "MySQL is ready"
               break
             fi
