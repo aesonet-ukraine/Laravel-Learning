@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     services:
       db:
-        image: mysql:8.0
+        image: mysql
         env:
           MYSQL_ROOT_PASSWORD: root
           MYSQL_DATABASE: laravel
@@ -25,7 +25,7 @@ jobs:
           php: [8.5]
     env:
       DB_CONNECTION: mysql
-      DB_HOST: localhost
+      DB_HOST: db
       DB_PORT: 3306
       DB_DATABASE: laravel
       DB_USERNAME: root
