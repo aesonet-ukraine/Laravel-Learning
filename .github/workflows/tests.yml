@@ -24,13 +24,13 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-          php: [8.4]
+          php: [8.5]
     env:
       DB_CONNECTION: mysql
       DB_HOST: localhost
       DB_PORT: 3306
       DB_DATABASE: laravel
-      DB_USERNAME: root
+      DB_USER: root
       DB_PASSWORD: password
     steps:
       - name: Checkout code
@@ -62,6 +62,11 @@ jobs:
 
       - name: Run seeds
         run: php artisan db:seed --class="OnDemandSeeder"
+
+      - name: Set up MySQL
+        run: |
+          sudo /etc/init.d/mysql start
+          mysql -e 'CREATE DATABASE ${{ env.DB_DATABASE }};' -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
 
       - name: Run tests
         run: php artisan test
