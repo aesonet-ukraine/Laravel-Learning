@@ -139,7 +139,7 @@ class AuthControllerTest extends FeatureTestCase
                 'Phone is required',
             ],
             'phone.max' => [
-                'surname',
+                'phone',
                 Str::random(16),
                 'Phone must not exceed 15 characters',
             ],

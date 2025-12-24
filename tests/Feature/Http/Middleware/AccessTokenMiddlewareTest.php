@@ -20,7 +20,7 @@ class AccessTokenMiddlewareTest extends TestCase
             'password' => $password,
         ]
         );
-        $response = $this->post(route('login'), [
+        $response = $this->post(route('api.auth.login'), [
             'email' => $user->email,
             'password' => $password,
         ]);
