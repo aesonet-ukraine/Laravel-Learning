@@ -15,11 +15,12 @@ class AccessTokenMiddlewareTest extends TestCase
     #[Test]
     public function it_return_unauthorized_when_the_token_does_not_exist(): void
     {
-        $password = 'password';
-        $user = User::factory()->create([
-            'password' => $password,
-        ]
-        );
+        $password = config()->get('app.admin_test_data.password');
+        $user = User::factory()
+            ->makeOne([
+                'email' => config()->get('app.admin_test_data.email'),
+                'password' => $password,
+            ]);
         $response = $this->post(route('api.auth.login'), [
             'email' => $user->email,
             'password' => $password,
