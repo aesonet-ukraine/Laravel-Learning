@@ -38,7 +38,6 @@ return [
                 // Match only routes whose domains match this pattern (use * as a wildcard to match any characters). Example: 'api.*'.
                 'domains' => ['*'],
             ],
-
             // Include these routes even if they did not match the rules above.
             'include' => [
                 // 'users.index', 'POST /new', '/auth/*'
