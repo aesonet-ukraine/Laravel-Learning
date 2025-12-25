@@ -43,7 +43,7 @@ jobs:
           extensions: json, dom, curl, libxml, mbstring
           coverage: none
       - name: Copy .env
-        run: php -r "file_exists('.env') || copy('.env.action', '.env');"
+        run: php -r "file_exists('.env') || copy('.env.testing', '.env');"
 
       - name: Install depencedies
         run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
@@ -58,6 +58,9 @@ jobs:
 
       - name: Run migrations
         run: php artisan migrate
+
+#      - name: Run seeds
+#        run: php artisan db:seed --class="OnDemandSeeder"
 
       - name: Tests execution
         run: php artisan test
