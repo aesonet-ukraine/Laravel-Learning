@@ -59,8 +59,5 @@ jobs:
       - name: Run migrations
         run: php artisan migrate
 
-      - name: Run seeds
-        run: php artisan db:seed --class="OnDemandSeeder"
-
       - name: Tests execution
         run: php artisan test
