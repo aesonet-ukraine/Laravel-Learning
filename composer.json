@@ -37,6 +37,7 @@
         }
     },
     "scripts": {
+        "pint": "vendor/bin/pint",
         "larastan": "./vendor/bin/phpstan analyse --memory-limit=2G",
         "larastan-baseline": "./vendor/bin/phpstan analyse --generate-baseline phpstan-baseline.php",
         "setup": [
