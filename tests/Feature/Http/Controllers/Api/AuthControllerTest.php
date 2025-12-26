@@ -18,7 +18,7 @@ class AuthControllerTest extends FeatureTestCase
     #[Test]
     public function is_created_user_with_valid_data(): void
     {
-        $password = 'password1234';
+        $password = 'Pasword123';
         $user = User::factory()
             ->unverified()
             ->fillPhone()
@@ -49,7 +49,7 @@ class AuthControllerTest extends FeatureTestCase
         mixed $value,
         string $message
     ): void {
-        $password = 'password1234';
+        $password = 'pasword123';
         $user = User::factory()
             ->unverified()
             ->fillPhone()

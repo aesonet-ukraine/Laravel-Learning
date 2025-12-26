@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Auth;
 
+use App\Rules\Password;
 use App\Rules\PhoneNumber;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -49,7 +50,7 @@ class RegisterRequest extends FormRequest
             'surname' => ['required', 'string', 'min:2', 'max:50'],
             'phone' => ['required', 'string', 'max:15', 'unique:users,phone', new PhoneNumber],
             'email' => ['required', 'string', 'email', 'unique:users,email'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'password' => ['required', 'string', 'min:8', 'confirmed', new Password],
         ];
     }
 }
