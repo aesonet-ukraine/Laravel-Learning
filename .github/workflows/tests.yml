@@ -43,7 +43,7 @@ jobs:
           extensions: json, dom, curl, libxml, mbstring
           coverage: none
       - name: Copy .env
-        run: php -r "file_exists('.env') || copy('.env.testing', '.env');"
+        run: php -r "file_exists('.env') || copy('.env.action', '.env');"
 
       - name: Install depencedies
         run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
