@@ -13,4 +13,9 @@ Route::name('api.')->group(function () {
             Route::post('login', [AuthController::class, 'login'])
                 ->name('login');
         });
+    Route::name('v1.')
+        ->prefix('v1')
+        ->group(function () {
+            require __DIR__.'/versions/v1.php';
+        });
 });
