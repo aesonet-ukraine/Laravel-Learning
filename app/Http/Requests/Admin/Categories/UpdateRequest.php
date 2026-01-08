@@ -32,6 +32,7 @@ class UpdateRequest extends FormRequest
         return [
             'title' => ['required_without:parent_id', 'string', 'min:2', 'max:255', Rule::unique('categories', 'title')->ignore($categoryId)],
             'parent_id' => ['required_without:title', 'numeric', 'exists:categories,id'],
+            'thumbnail' => ['nullable', 'string'],
         ];
     }
 }

@@ -25,6 +25,7 @@ class CreateRequest extends FormRequest
         return [
             'title' => ['required', 'string', 'min:2', 'max:255', 'unique:categories'],
             'parent_id' => ['nullable', 'numeric', 'exists:categories,id'],
+            'thumbnail' => ['nullable', 'string', 'max:255'],
         ];
     }
 }
