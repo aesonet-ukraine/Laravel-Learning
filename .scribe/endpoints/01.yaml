@@ -4,50 +4,6 @@ endpoints:
   -
     custom: []
     httpMethods:
-      - GET
-    uri: api/v1/admin/categories
-    metadata:
-      custom: []
-      groupName: Admin
-      groupDescription: 'Admin API endpoints'
-      subgroup: Categories
-      subgroupDescription: |-
-        CRUD categories endpoints. 
-
-        <strong>Warning!</strong> All requests allows only for the next roles: ADMIN, MODERATOR.
-      title: 'List of categories'
-      description: 'Load the list of categories'
-      authenticated: true
-      deprecated: false
-    headers:
-      access-token: 'API ACCESS TOKEN'
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 401
-        content: '{"message":"Unauthenticated."}'
-        headers:
-          cache-control: 'no-cache, private'
-          content-type: application/json
-          access-control-allow-origin: '*'
-        description: null
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
       - POST
     uri: api/v1/admin/categories
     metadata:
@@ -94,67 +50,23 @@ endpoints:
         exampleWasSpecified: false
         nullable: true
         deprecated: false
+      thumbnail:
+        custom: []
+        name: thumbnail
+        description: 'Must not be greater than 255 characters.'
+        required: false
+        example: m
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
     cleanBodyParameters:
       title: b
       parent_id: 4326.41688
+      thumbnail: m
     fileParameters: []
     responses: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - GET
-    uri: 'api/v1/admin/categories/{id}'
-    metadata:
-      custom: []
-      groupName: Admin
-      groupDescription: 'Admin API endpoints'
-      subgroup: Categories
-      subgroupDescription: |-
-        CRUD categories endpoints. 
-
-        <strong>Warning!</strong> All requests allows only for the next roles: ADMIN, MODERATOR.
-      title: 'Show category'
-      description: 'Show specified category by id'
-      authenticated: true
-      deprecated: false
-    headers:
-      access-token: 'API ACCESS TOKEN'
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      id:
-        custom: []
-        name: id
-        description: 'The ID of the category.'
-        required: true
-        example: 29
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanUrlParameters:
-      id: 29
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 401
-        content: '{"message":"Unauthenticated."}'
-        headers:
-          cache-control: 'no-cache, private'
-          content-type: application/json
-          access-control-allow-origin: '*'
-        description: null
     responseFields: []
     auth: []
     controller: null
@@ -189,22 +101,22 @@ endpoints:
         name: id
         description: 'The ID of the category.'
         required: true
-        example: 29
+        example: 16
         type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      id: 29
+      id: 16
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
       title:
         custom: []
         name: title
-        description: 'Must be at least 2 characters. Must not be greater than 255 characters.'
-        required: true
+        description: 'This field is required when <code>parent_id</code> is not present. Must be at least 2 characters. Must not be greater than 255 characters.'
+        required: false
         example: b
         type: string
         enumValues: []
@@ -214,10 +126,21 @@ endpoints:
       parent_id:
         custom: []
         name: parent_id
-        description: 'The <code>id</code> of an existing record in the categories table.'
+        description: 'This field is required when <code>title</code> is not present. The <code>id</code> of an existing record in the categories table.'
         required: false
         example: 4326.41688
         type: number
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      thumbnail:
+        custom: []
+        name: thumbnail
+        description: ''
+        required: false
+        example: architecto
+        type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: true
@@ -225,6 +148,7 @@ endpoints:
     cleanBodyParameters:
       title: b
       parent_id: 4326.41688
+      thumbnail: architecto
     fileParameters: []
     responses: []
     responseFields: []
@@ -236,7 +160,7 @@ endpoints:
     custom: []
     httpMethods:
       - DELETE
-    uri: 'api/v1/admin/categories/{id}'
+    uri: 'api/v1/admin/categories/{category_id}'
     metadata:
       custom: []
       groupName: Admin
@@ -255,19 +179,113 @@ endpoints:
       Content-Type: application/json
       Accept: application/json
     urlParameters:
-      id:
+      category_id:
         custom: []
-        name: id
+        name: category_id
         description: 'The ID of the category.'
         required: true
-        example: 29
+        example: 16
         type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      id: 29
+      category_id: 16
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - PUT
+    uri: 'api/v1/admin/categories/{category_id}/restore'
+    metadata:
+      custom: []
+      groupName: Admin
+      groupDescription: 'Admin API endpoints'
+      subgroup: Categories
+      subgroupDescription: |-
+        CRUD categories endpoints. 
+
+        <strong>Warning!</strong> All requests allows only for the next roles: ADMIN, MODERATOR.
+      title: 'Restore category'
+      description: 'Restore specified deleted category by id'
+      authenticated: true
+      deprecated: false
+    headers:
+      access-token: 'API ACCESS TOKEN'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      category_id:
+        custom: []
+        name: category_id
+        description: 'The ID of the category.'
+        required: true
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      category_id: 16
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - DELETE
+    uri: 'api/v1/admin/categories/{category_id}/force-delete'
+    metadata:
+      custom: []
+      groupName: Admin
+      groupDescription: 'Admin API endpoints'
+      subgroup: Categories
+      subgroupDescription: |-
+        CRUD categories endpoints. 
+
+        <strong>Warning!</strong> All requests allows only for the next roles: ADMIN, MODERATOR.
+      title: 'Force delete category'
+      description: 'Permanently delete specified category by id'
+      authenticated: true
+      deprecated: false
+    headers:
+      access-token: 'API ACCESS TOKEN'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      category_id:
+        custom: []
+        name: category_id
+        description: 'The ID of the category.'
+        required: true
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      category_id: 16
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []

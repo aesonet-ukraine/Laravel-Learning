@@ -12,7 +12,7 @@ class CategoryFactory extends Factory
 {
     public function definition(): array
     {
-        $title = $this->faker->unique()->words(rand(1, 3), true);
+        $title = Str::limit($this->faker->unique()->words(rand(1, 3), true), 255);
         $slug = Str::slug($title, '-');
 
         return [

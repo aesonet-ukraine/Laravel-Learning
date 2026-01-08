@@ -144,9 +144,14 @@ return [
     // Setting `laravel.add_routes` to true (above) will also add a route for the collection.
     'postman' => [
         'enabled' => true,
-
         'overrides' => [
             // 'info.version' => '2.0.0',
+        ],
+        'variables' => [
+            'baseUrl' => env('APP_URL', 'http://localhost'),
+            'access-token' => env('ACCESS_TOKEN'),
+            'adminMail' => env('ADMIN_EMAIL'),
+            'adminPassword' => env('ADMIN_PASSWORD'),
         ],
     ],
 

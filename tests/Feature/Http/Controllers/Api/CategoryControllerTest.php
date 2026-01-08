@@ -17,7 +17,7 @@ class CategoryControllerTest extends FeatureTestCase
      * A basic feature test example.
      */
     #[Test]
-    public function is_created_category_successful(): void
+    public function it_created_category_successful(): void
     {
 
         $user = User::factory()
@@ -46,7 +46,7 @@ class CategoryControllerTest extends FeatureTestCase
     }
 
     #[Test]
-    public function it_updated_category_successful_by_validation(): void
+    public function is_updated_category_successful_by_validation(): void
     {
         $title = 'Updated Category Title';
         $user = User::factory()
@@ -71,6 +71,185 @@ class CategoryControllerTest extends FeatureTestCase
         $response
             ->assertJson(fn (AssertableJson $json) => $json->has('data.id')
                 ->where('data.title', $title)
+                ->etc()
+            );
+
+    }
+
+    #[Test]
+    public function it_deleted_category_successful(): void
+    {
+        $user = User::factory()
+            ->unverified()
+            ->fillPhone()
+            ->syncAdminRole()
+            ->create();
+        $this->actingAs($user, 'sanctum');
+
+        $category = Category::factory()
+            ->createOne();
+        $response = $this->request()
+            ->deleteJson(
+                route('api.v1.admin.categories.delete', [
+                    'category' => $category->id,
+                ])
+            );
+        $response->assertStatus(200);
+        $response
+            ->assertJson(fn (AssertableJson $json) => $json->has('data.id')
+                ->where('data.id', $category->id)
+                ->etc()
+            );
+    }
+
+    #[Test]
+    #[DataProvider('failedCategoryPermission')]
+    public function it_not_deleted_category_successful(
+        RolesEnum $role,
+    ): void {
+        $user = User::factory()
+            ->unverified()
+            ->fillPhone()
+            ->syncCustomRole($role)
+            ->create();
+        $this->actingAs($user, 'sanctum');
+
+        $category = Category::factory()
+            ->createOne();
+        $response = $this->request()
+            ->deleteJson(
+                route('api.v1.admin.categories.delete', [
+                    'category' => $category->id,
+                ])
+            );
+        $response->assertStatus(403)
+            ->assertJson(fn (AssertableJson $json) => $json->where(
+                'message',
+                'User does not have the right roles.')
+                ->etc()
+            );
+
+    }
+
+    #[Test]
+    public function it_restore_deleted_category_successful(): void
+    {
+        $user = User::factory()
+            ->unverified()
+            ->fillPhone()
+            ->syncAdminRole()
+            ->create();
+        $this->actingAs($user, 'sanctum');
+
+        $category = Category::factory()
+            ->createOne();
+        $this->request()
+            ->deleteJson(
+                route('api.v1.admin.categories.delete', [
+                    'category' => $category->id,
+                ])
+            );
+        $response = $this->request()
+            ->putJson(
+                route('api.v1.admin.categories.restore', [
+                    'category' => $category->id,
+                ])
+            );
+        $response->assertStatus(200);
+        $response
+            ->assertJson(fn (AssertableJson $json) => $json->has('data.id')
+                ->where('data.id', $category->id)
+                ->etc()
+            );
+    }
+
+    #[Test]
+    #[DataProvider('failedCategoryPermission')]
+    public function it_not_restore_deleted_category_successful(
+        RolesEnum $role,
+    ): void {
+        $user = User::factory()
+            ->unverified()
+            ->fillPhone()
+            ->syncCustomRole($role)
+            ->create();
+        $this->actingAs($user, 'sanctum');
+
+        $category = Category::factory()
+            ->createOne();
+
+        $this->request()
+            ->deleteJson(
+                route('api.v1.admin.categories.delete', [
+                    'category' => $category->id,
+                ])
+            );
+        $response = $this->request()
+            ->putJson(
+                route('api.v1.admin.categories.restore', [
+                    'category' => $category->id,
+                ])
+            );
+
+        $response->assertStatus(403)
+            ->assertJson(fn (AssertableJson $json) => $json->where(
+                'message',
+                'User does not have the right roles.')
+                ->etc()
+            );
+
+    }
+
+    #[Test]
+    public function it_force_deleted_category_successful(): void
+    {
+        $user = User::factory()
+            ->unverified()
+            ->fillPhone()
+            ->syncAdminRole()
+            ->create();
+        $this->actingAs($user, 'sanctum');
+        $category = Category::factory()
+            ->createOne();
+        $response = $this->request()
+            ->deleteJson(
+                route('api.v1.admin.categories.force-delete', [
+                    'category' => $category->id,
+                ])
+            );
+
+        $response->assertStatus(200);
+        $response
+            ->assertJson(fn (AssertableJson $json) => $json->has('data.id')
+                ->where('data.id', $category->id)
+                ->etc()
+            );
+    }
+
+    #[Test]
+    #[DataProvider('failedCategoryPermission')]
+    public function it_force_not_deleted_category_successful(
+        RolesEnum $role,
+    ): void {
+        $user = User::factory()
+            ->unverified()
+            ->fillPhone()
+            ->syncCustomRole($role)
+            ->create();
+        $this->actingAs($user, 'sanctum');
+
+        $category = Category::factory()
+            ->createOne();
+        $response = $this->request()
+            ->deleteJson(
+                route('api.v1.admin.categories.force-delete', [
+                    'category' => $category->id,
+                ])
+            );
+        $response->assertStatus(403)
+            ->assertJson(fn (AssertableJson $json) => $json->where(
+                'message',
+                'User does not have the right roles.')
                 ->etc()
             );
 
@@ -117,7 +296,7 @@ class CategoryControllerTest extends FeatureTestCase
     }
 
     #[Test]
-    #[DataProvider('failedCreatedCategoryPermission')]
+    #[DataProvider('failedCategoryPermission')]
     public function it_not_created_category_successful_by_user_permission(
         mixed $role,
         string $message
@@ -318,7 +497,7 @@ class CategoryControllerTest extends FeatureTestCase
         ];
     }
 
-    public static function failedCreatedCategoryPermission(): array
+    public static function failedCategoryPermission(): array
     {
         return [
             'permission.user' => [

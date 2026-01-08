@@ -15,12 +15,14 @@ Route::name('admin.')->prefix('admin')->middleware([
         ->name('categories.delete')
         ->middleware('permission:'.CategoryEnum::DELETE_CATEGORY->value)
         ->withTrashed();
+
     Route::put('categories/{category}/restore', [CategoriesController::class, 'restore'])
         ->name('categories.restore')
-        ->middleware('permission'.CategoryEnum::DELETE_CATEGORY->value)
+        ->middleware('permission:'.CategoryEnum::DELETE_CATEGORY->value)
         ->withTrashed();
+
     Route::delete('categories/{category}/force-delete', [CategoriesController::class, 'forceDelete'])
         ->name('categories.force-delete')
-        ->middleware('permission'.RolesEnum::ADMIN->value)
+        ->middleware('role:'.RolesEnum::ADMIN->value)
         ->withTrashed();
 });
