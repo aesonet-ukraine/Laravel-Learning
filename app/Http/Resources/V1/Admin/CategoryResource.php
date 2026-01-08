@@ -29,6 +29,7 @@ class CategoryResource extends JsonResource
             'title' => $this->title,
             'slug' => $this->slug,
             'parent_id' => $this->parent_id,
+            'thumbnail' => $this->thumbnail,
             'parent' => self::make($this->whenLoaded('parent')),
             //            'children'=> new CagoriesCollection($this->whenLoaded('children')),
             'products_count' => $this->products_count ?? 0,

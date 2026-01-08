@@ -55,10 +55,17 @@ class UserFactory extends Factory
         });
     }
 
-    public function syncAdminRole(string $password): self
+    public function syncAdminRole(): self
     {
         return $this->afterCreating(function (User $user) {
             $user->syncRoles(RolesEnum::ADMIN);
+        });
+    }
+
+    public function syncCustomRole(RolesEnum $customRole): self
+    {
+        return $this->afterCreating(function (User $user) use ($customRole) {
+            $user->syncRoles($customRole);
         });
     }
 }
