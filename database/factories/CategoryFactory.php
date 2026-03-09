@@ -18,7 +18,6 @@ class CategoryFactory extends Factory
         return [
             'title' => $title,
             'slug' => $slug,
-            'parent_id' => null,
             'thumbnail' => $this->generateThumbnail($slug),
         ];
     }
