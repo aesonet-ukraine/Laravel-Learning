@@ -28,6 +28,13 @@ return [
     // If you're using `laravel` type, you can set this to a dynamic string, like '{{ config("app.tenant_url") }}' to get a dynamic base URL.
     'base_url' => config('app.url'),
 
+    'example_values' => [
+        'baseUrl' => 'http://localhost',
+        'access-token' => '5d4c8a7e-9f1b-4e2d-b3a6-0c7f2e9a14b8',
+        'adminMail' => 'admin@admin.com',
+        'adminPassword' => 'admin1234',
+        'loginToken' => '8ljpH14x29cnRdXEJRmrpYrvLHp23UsKtNz7rpBHa4ca72cc5a',
+    ],
     // Routes to include in the docs
     'routes' => [
         [
@@ -145,13 +152,13 @@ return [
     'postman' => [
         'enabled' => true,
         'overrides' => [
-            // 'info.version' => '2.0.0',
-        ],
-        'variables' => [
-            'baseUrl' => env('APP_URL', 'http://localhost'),
-            'access-token' => env('ACCESS_TOKEN'),
-            'adminMail' => env('ADMIN_EMAIL'),
-            'adminPassword' => env('ADMIN_PASSWORD'),
+            'variables' => [
+                ['key' => 'baseUrl', 'value' => env('APP_URL', 'http://localhost'), 'type' => 'string'],
+                ['key' => 'adminEmail', 'value' => env('ADMIN_EMAIL', ''), 'type' => 'string'],
+                ['key' => 'adminPassword', 'value' => env('ADMIN_PASSWORD', ''), 'type' => 'string'],
+                ['key' => 'accessToken', 'value' => env('ACCESS_TOKEN'), 'type' => 'string'],
+                ['key' => 'bearerToken', 'value' => '', 'type' => 'string'],
+            ],
         ],
     ],
 
@@ -161,7 +168,6 @@ return [
     // Setting `laravel.add_routes` to true (above) will also add a route for the spec.
     'openapi' => [
         'enabled' => false,
-
         // The OpenAPI spec version to generate. Supported versions: '3.0.3', '3.1.0'.
         // OpenAPI 3.1 is more compatible with JSON Schema and is becoming the dominant version.
         // See https://spec.openapis.org/oas/v3.1.0 for details on 3.1 changes.

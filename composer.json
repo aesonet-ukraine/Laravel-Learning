@@ -39,8 +39,8 @@
         }
     },
     "scripts": {
-        "scribe": "php artisan scribe:generate",
-        "pint": "vendor/bin/pint",
+        "scribe": "docker exec laravelloc-laravel.test-1 php artisan scribe:generate",
+        "pint": "./vendor/bin/pint",
         "larastan": "./vendor/bin/phpstan analyse --memory-limit=2G",
         "larastan-baseline": "./vendor/bin/phpstan analyse --generate-baseline phpstan-baseline.php",
         "setup": [

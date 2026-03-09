@@ -11,7 +11,10 @@ class ProductFactory extends Factory
 {
     public function definition(): array
     {
-        $title = $this->faker->unique()->words(rand(1, 3), true);
+        $title = $this->faker->productName();
+        //        $title = $this->faker->unique()->words(rand(1, 3), true);
+        //        $category = $this->faker->productCategory();
+        //        $title = $this->faker->unique()->productName($category['key']);
         $slug = Str::slug($title, '-');
 
         return [
@@ -22,7 +25,7 @@ class ProductFactory extends Factory
             'price' => $this->faker->randomFloat(2, 1, 200),
             'discount' => $this->faker->boolean() ? rand(10, 65) : null,
             'quantity' => $this->faker->numberBetween(0, 50),
-            'thumbnail' => $this->generateThumbnail($slug),
+            'thumbnail' => $this->faker->generateThumbnail($slug),
         ];
     }
 
@@ -40,16 +43,16 @@ class ProductFactory extends Factory
 
         $faker = \Faker\Factory::create();
         $faker->addProvider(new FakerPicsumImagesProvider($faker));
-        if (! Storage::exists($dirName)) {
-            Storage::createDirectory($dirName);
+        if (! Storage::disk('public')->exists($dirName)) {
+            Storage::disk('public')->createDirectory($dirName);
         }
 
         /*
          * @var FakerPicsumImagesProvider $faker
          */
         return $dirName.'/'.$faker->image(
-            dir: Storage::path($dirName),
-            fullPath: false,
+            dir: Storage::disk('public')->path($dirName),
+            isFullPath: false,
         );
 
     }

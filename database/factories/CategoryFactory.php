@@ -18,7 +18,7 @@ class CategoryFactory extends Factory
         return [
             'title' => $title,
             'slug' => $slug,
-            'parent_id' => $this->withParent(),
+            'parent_id' => null,
             'thumbnail' => $this->generateThumbnail($slug),
         ];
     }
@@ -29,15 +29,16 @@ class CategoryFactory extends Factory
 
         $faker = \Faker\Factory::create();
         $faker->addProvider(new FakerPicsumImagesProvider($faker));
-        if (! Storage::exists($dirName)) {
-            Storage::makeDirectory($dirName);
+        if (! Storage::disk('public')->exists($dirName)) {
+            Storage::disk('public')->makeDirectory($dirName);
         }
 
         /*
          * @var FakerPicsumImagesProvider $faker
          */
         return $dirName.'/'.$faker->image(
-            dir: Storage::path($dirName),
+            dir: Storage::disk('public')->path($dirName),
+            isFullPath: false,
         );
 
     }
