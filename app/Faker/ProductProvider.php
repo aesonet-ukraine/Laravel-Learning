@@ -2,6 +2,7 @@
 
 namespace App\Faker;
 
+use Faker\Factory;
 use Faker\Generator;
 use Faker\Provider\Base;
 use Illuminate\Support\Facades\Storage;
@@ -421,7 +422,7 @@ class ProductProvider extends Base
     public function generateThumbnail(string $slug): string
     {
         $dirName = "faker/products/$slug";
-        $faker = \Faker\Factory::create();
+        $faker = Factory::create();
         $faker->addProvider(new FakerPicsumImagesProvider($faker));
 
         if (! Storage::disk('public')->exists($dirName)) {

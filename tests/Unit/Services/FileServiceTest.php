@@ -3,6 +3,7 @@
 namespace Tests\Unit\Services;
 
 use App\Service\Contract\FileServiceContract;
+use Faker\Factory;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use PHPUnit\Framework\Attributes\Test;
@@ -16,7 +17,7 @@ class FileServiceTest extends TestCase
     {
         Storage::fake('public');
         $path = 'uploads';
-        $faker = \Faker\Factory::create();
+        $faker = Factory::create();
         $faker->addProvider(new FakerPicsumImagesProvider($faker));
         $fileUrl = $faker->imageUrl(640, 480);
         $imageContents = file_get_contents($fileUrl);
