@@ -148,7 +148,7 @@
     </ul>
 
     <ul class="toc-footer" id="last-updated">
-        <li>Last updated: January 13, 2026</li>
+        <li>Last updated: March 11, 2026</li>
     </ul>
 </div>
 
@@ -201,7 +201,7 @@ You can switch the language used with the tabs at the top right (or from the nav
     \"sort\": [
         {
             \"key\": \"architecto\",
-            \"direction\": \"asc\"
+            \"direction\": \"desc\"
         }
     ]
 }"
@@ -226,7 +226,7 @@ let body = {
     "sort": [
         {
             "key": "architecto",
-            "direction": "asc"
+            "direction": "desc"
         }
     ]
 };
@@ -256,7 +256,7 @@ $response = $client-&gt;get(
             'sort' =&gt; [
                 [
                     'key' =&gt; 'architecto',
-                    'direction' =&gt; 'asc',
+                    'direction' =&gt; 'desc',
                 ],
             ],
         ],
@@ -458,10 +458,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="sort.0.direction"                data-endpoint="GETapi-v1-admin-categories"
-               value="asc"
+               value="desc"
                data-component="body">
     <br>
-<p>This field is required when <code>sort.*.key</code> is present. Example: <code>asc</code></p>
+<p>This field is required when <code>sort.*.key</code> is present. Example: <code>desc</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>asc</code></li> <li><code>desc</code></li></ul>
                     </div>
@@ -680,7 +680,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/v1/admin/categories/36" \
+    --get "http://localhost/api/v1/admin/categories/1" \
     --header "access-token: API ACCESS TOKEN" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -688,7 +688,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/categories/36"
+    "http://localhost/api/v1/admin/categories/1"
 );
 
 const headers = {
@@ -705,7 +705,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost/api/v1/admin/categories/36';
+$url = 'http://localhost/api/v1/admin/categories/1';
 $response = $client-&gt;get(
     $url,
     [
@@ -830,10 +830,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="id"                data-endpoint="GETapi-v1-admin-categories--id-"
-               value="36"
+               value="1"
                data-component="url">
     <br>
-<p>The ID of the category. Example: <code>36</code></p>
+<p>The ID of the category. Example: <code>1</code></p>
             </div>
                     </form>
 
@@ -851,7 +851,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://localhost/api/v1/admin/categories/36" \
+    "http://localhost/api/v1/admin/categories/1" \
     --header "access-token: API ACCESS TOKEN" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -865,7 +865,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/categories/36"
+    "http://localhost/api/v1/admin/categories/1"
 );
 
 const headers = {
@@ -889,7 +889,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost/api/v1/admin/categories/36';
+$url = 'http://localhost/api/v1/admin/categories/1';
 $response = $client-&gt;put(
     $url,
     [
@@ -1007,10 +1007,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="id"                data-endpoint="PUTapi-v1-admin-categories--id-"
-               value="36"
+               value="1"
                data-component="url">
     <br>
-<p>The ID of the category. Example: <code>36</code></p>
+<p>The ID of the category. Example: <code>1</code></p>
             </div>
                             <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
@@ -1065,7 +1065,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost/api/v1/admin/categories/36" \
+    "http://localhost/api/v1/admin/categories/1" \
     --header "access-token: API ACCESS TOKEN" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -1073,7 +1073,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/categories/36"
+    "http://localhost/api/v1/admin/categories/1"
 );
 
 const headers = {
@@ -1090,7 +1090,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost/api/v1/admin/categories/36';
+$url = 'http://localhost/api/v1/admin/categories/1';
 $response = $client-&gt;delete(
     $url,
     [
@@ -1199,10 +1199,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="category_id"                data-endpoint="DELETEapi-v1-admin-categories--category_id-"
-               value="36"
+               value="1"
                data-component="url">
     <br>
-<p>The ID of the category. Example: <code>36</code></p>
+<p>The ID of the category. Example: <code>1</code></p>
             </div>
                     </form>
 
@@ -1220,7 +1220,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://localhost/api/v1/admin/categories/36/restore" \
+    "http://localhost/api/v1/admin/categories/1/restore" \
     --header "access-token: API ACCESS TOKEN" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -1228,7 +1228,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/categories/36/restore"
+    "http://localhost/api/v1/admin/categories/1/restore"
 );
 
 const headers = {
@@ -1245,7 +1245,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost/api/v1/admin/categories/36/restore';
+$url = 'http://localhost/api/v1/admin/categories/1/restore';
 $response = $client-&gt;put(
     $url,
     [
@@ -1354,10 +1354,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="category_id"                data-endpoint="PUTapi-v1-admin-categories--category_id--restore"
-               value="36"
+               value="1"
                data-component="url">
     <br>
-<p>The ID of the category. Example: <code>36</code></p>
+<p>The ID of the category. Example: <code>1</code></p>
             </div>
                     </form>
 
@@ -1375,7 +1375,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost/api/v1/admin/categories/36/force-delete" \
+    "http://localhost/api/v1/admin/categories/1/force-delete" \
     --header "access-token: API ACCESS TOKEN" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -1383,7 +1383,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/categories/36/force-delete"
+    "http://localhost/api/v1/admin/categories/1/force-delete"
 );
 
 const headers = {
@@ -1400,7 +1400,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost/api/v1/admin/categories/36/force-delete';
+$url = 'http://localhost/api/v1/admin/categories/1/force-delete';
 $response = $client-&gt;delete(
     $url,
     [
@@ -1509,10 +1509,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="category_id"                data-endpoint="DELETEapi-v1-admin-categories--category_id--force-delete"
-               value="36"
+               value="1"
                data-component="url">
     <br>
-<p>The ID of the category. Example: <code>36</code></p>
+<p>The ID of the category. Example: <code>1</code></p>
             </div>
                     </form>
 
@@ -1546,7 +1546,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"sort\": [
         {
             \"key\": \"architecto\",
-            \"direction\": \"asc\"
+            \"direction\": \"desc\"
         }
     ]
 }"
@@ -1571,7 +1571,7 @@ let body = {
     "sort": [
         {
             "key": "architecto",
-            "direction": "asc"
+            "direction": "desc"
         }
     ]
 };
@@ -1601,7 +1601,7 @@ $response = $client-&gt;get(
             'sort' =&gt; [
                 [
                     'key' =&gt; 'architecto',
-                    'direction' =&gt; 'asc',
+                    'direction' =&gt; 'desc',
                 ],
             ],
         ],
@@ -1803,10 +1803,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="sort.0.direction"                data-endpoint="GETapi-v1-admin-products"
-               value="asc"
+               value="desc"
                data-component="body">
     <br>
-<p>This field is required when <code>sort.*.key</code> is present. Example: <code>asc</code></p>
+<p>This field is required when <code>sort.*.key</code> is present. Example: <code>desc</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>asc</code></li> <li><code>desc</code></li></ul>
                     </div>
@@ -1839,7 +1839,7 @@ Must be one of:
     --form "discount=1"\
     --form "quantity=40"\
     --form "categories[]=4326.41688"\
-    --form "thumbnail=@/tmp/php9mmgmmm5h4ve6eYP9OF" </code></pre></div>
+    --form "thumbnail=@/tmp/php0es3bnp4pv518FPlmN7" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -1912,7 +1912,7 @@ $response = $client-&gt;post(
             ],
             [
                 'name' =&gt; 'thumbnail',
-                'contents' =&gt; fopen('/tmp/php9mmgmmm5h4ve6eYP9OF', 'r')
+                'contents' =&gt; fopen('/tmp/php0es3bnp4pv518FPlmN7', 'r')
             ],
         ],
     ]
@@ -2090,7 +2090,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>Must be an image. Example: <code>/tmp/php9mmgmmm5h4ve6eYP9OF</code></p>
+<p>Must be an image. Example: <code>/tmp/php0es3bnp4pv518FPlmN7</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>categories</code></b>&nbsp;&nbsp;
@@ -2122,7 +2122,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/v1/admin/products/536" \
+    --get "http://localhost/api/v1/admin/products/1" \
     --header "access-token: API ACCESS TOKEN" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -2130,7 +2130,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/products/536"
+    "http://localhost/api/v1/admin/products/1"
 );
 
 const headers = {
@@ -2147,7 +2147,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost/api/v1/admin/products/536';
+$url = 'http://localhost/api/v1/admin/products/1';
 $response = $client-&gt;get(
     $url,
     [
@@ -2272,10 +2272,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="id"                data-endpoint="GETapi-v1-admin-products--id-"
-               value="536"
+               value="1"
                data-component="url">
     <br>
-<p>The ID of the product. Example: <code>536</code></p>
+<p>The ID of the product. Example: <code>1</code></p>
             </div>
                     </form>
 
@@ -2293,7 +2293,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://localhost/api/v1/admin/products/536" \
+    "http://localhost/api/v1/admin/products/1" \
     --header "access-token: API ACCESS TOKEN" \
     --header "Content-Type: multipart/form-data" \
     --header "Accept: application/json" \
@@ -2304,12 +2304,12 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --form "discount=1"\
     --form "quantity=40"\
     --form "categories[]=4326.41688"\
-    --form "thumbnail=@/tmp/phpq5enopjp9qtcdS2xzCH" </code></pre></div>
+    --form "thumbnail=@/tmp/php78h5m4ebufq3cDCQ93U" </code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/products/536"
+    "http://localhost/api/v1/admin/products/1"
 );
 
 const headers = {
@@ -2337,7 +2337,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost/api/v1/admin/products/536';
+$url = 'http://localhost/api/v1/admin/products/1';
 $response = $client-&gt;put(
     $url,
     [
@@ -2377,7 +2377,7 @@ $response = $client-&gt;put(
             ],
             [
                 'name' =&gt; 'thumbnail',
-                'contents' =&gt; fopen('/tmp/phpq5enopjp9qtcdS2xzCH', 'r')
+                'contents' =&gt; fopen('/tmp/php78h5m4ebufq3cDCQ93U', 'r')
             ],
         ],
     ]
@@ -2484,10 +2484,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="id"                data-endpoint="PUTapi-v1-admin-products--id-"
-               value="536"
+               value="1"
                data-component="url">
     <br>
-<p>The ID of the product. Example: <code>536</code></p>
+<p>The ID of the product. Example: <code>1</code></p>
             </div>
                             <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
@@ -2572,7 +2572,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>Must be an image. Example: <code>/tmp/phpq5enopjp9qtcdS2xzCH</code></p>
+<p>Must be an image. Example: <code>/tmp/php78h5m4ebufq3cDCQ93U</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>categories</code></b>&nbsp;&nbsp;
@@ -2604,7 +2604,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost/api/v1/admin/products/536" \
+    "http://localhost/api/v1/admin/products/1" \
     --header "access-token: API ACCESS TOKEN" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -2612,7 +2612,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/products/536"
+    "http://localhost/api/v1/admin/products/1"
 );
 
 const headers = {
@@ -2629,7 +2629,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost/api/v1/admin/products/536';
+$url = 'http://localhost/api/v1/admin/products/1';
 $response = $client-&gt;delete(
     $url,
     [
@@ -2738,10 +2738,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="product"                data-endpoint="DELETEapi-v1-admin-products--product-"
-               value="536"
+               value="1"
                data-component="url">
     <br>
-<p>The product. Example: <code>536</code></p>
+<p>The product. Example: <code>1</code></p>
             </div>
                     </form>
 
@@ -2759,7 +2759,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://localhost/api/v1/admin/products/536/restore" \
+    "http://localhost/api/v1/admin/products/1/restore" \
     --header "access-token: API ACCESS TOKEN" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -2767,7 +2767,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/products/536/restore"
+    "http://localhost/api/v1/admin/products/1/restore"
 );
 
 const headers = {
@@ -2784,7 +2784,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost/api/v1/admin/products/536/restore';
+$url = 'http://localhost/api/v1/admin/products/1/restore';
 $response = $client-&gt;put(
     $url,
     [
@@ -2893,10 +2893,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="product"                data-endpoint="PUTapi-v1-admin-products--product--restore"
-               value="536"
+               value="1"
                data-component="url">
     <br>
-<p>The product. Example: <code>536</code></p>
+<p>The product. Example: <code>1</code></p>
             </div>
                     </form>
 
@@ -2914,7 +2914,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost/api/v1/admin/products/536/force-delete" \
+    "http://localhost/api/v1/admin/products/1/force-delete" \
     --header "access-token: API ACCESS TOKEN" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -2922,7 +2922,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/products/536/force-delete"
+    "http://localhost/api/v1/admin/products/1/force-delete"
 );
 
 const headers = {
@@ -2939,7 +2939,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost/api/v1/admin/products/536/force-delete';
+$url = 'http://localhost/api/v1/admin/products/1/force-delete';
 $response = $client-&gt;delete(
     $url,
     [
@@ -3048,10 +3048,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="product"                data-endpoint="DELETEapi-v1-admin-products--product--force-delete"
-               value="536"
+               value="1"
                data-component="url">
     <br>
-<p>The product. Example: <code>536</code></p>
+<p>The product. Example: <code>1</code></p>
             </div>
                     </form>
 

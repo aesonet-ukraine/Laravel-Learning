@@ -99,7 +99,7 @@ endpoints:
         name: 'sort[].direction'
         description: 'This field is required when <code>sort.*.key</code> is present.'
         required: false
-        example: asc
+        example: desc
         type: string
         enumValues:
           - asc
@@ -114,7 +114,7 @@ endpoints:
       sort:
         -
           key: architecto
-          direction: asc
+          direction: desc
     fileParameters: []
     responses:
       -
@@ -230,14 +230,14 @@ endpoints:
         name: id
         description: 'The ID of the category.'
         required: true
-        example: 36
+        example: 1
         type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      id: 36
+      id: 1
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -287,14 +287,14 @@ endpoints:
         name: id
         description: 'The ID of the category.'
         required: true
-        example: 36
+        example: 1
         type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      id: 36
+      id: 1
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
@@ -370,14 +370,14 @@ endpoints:
         name: category_id
         description: 'The ID of the category.'
         required: true
-        example: 36
+        example: 1
         type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      category_id: 36
+      category_id: 1
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -417,14 +417,14 @@ endpoints:
         name: category_id
         description: 'The ID of the category.'
         required: true
-        example: 36
+        example: 1
         type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      category_id: 36
+      category_id: 1
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -464,14 +464,14 @@ endpoints:
         name: category_id
         description: 'The ID of the category.'
         required: true
-        example: 36
+        example: 1
         type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      category_id: 36
+      category_id: 1
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -581,7 +581,7 @@ endpoints:
         name: 'sort[].direction'
         description: 'This field is required when <code>sort.*.key</code> is present.'
         required: false
-        example: asc
+        example: desc
         type: string
         enumValues:
           - asc
@@ -596,7 +596,7 @@ endpoints:
       sort:
         -
           key: architecto
-          direction: asc
+          direction: desc
     fileParameters: []
     responses:
       -
@@ -774,14 +774,14 @@ endpoints:
         name: id
         description: 'The ID of the product.'
         required: true
-        example: 536
+        example: 1
         type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      id: 536
+      id: 1
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -831,14 +831,14 @@ endpoints:
         name: id
         description: 'The ID of the product.'
         required: true
-        example: 536
+        example: 1
         type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      id: 536
+      id: 1
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
@@ -976,14 +976,14 @@ endpoints:
         name: product
         description: 'The product.'
         required: true
-        example: 536
+        example: 1
         type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      product: 536
+      product: 1
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -1023,14 +1023,14 @@ endpoints:
         name: product
         description: 'The product.'
         required: true
-        example: 536
+        example: 1
         type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      product: 536
+      product: 1
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -1070,14 +1070,14 @@ endpoints:
         name: product
         description: 'The product.'
         required: true
-        example: 536
+        example: 1
         type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      product: 536
+      product: 1
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
