@@ -8,6 +8,7 @@ use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Http\Resources\RegisteredUserResource;
 use App\Models\User;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Knuckles\Scribe\Attributes\BodyParam;
 use Knuckles\Scribe\Attributes\Endpoint;
@@ -25,7 +26,7 @@ class AuthController extends Controller
      */
     #[Endpoint('Register a new user', 'Registers a new user and returns an authentication token.')]
     #[BodyParam('password_confirmation', 'string', 'The password confirmation field must match the password field.', required: true)]
-    public function register(RegisterRequest $request)
+    public function register(RegisterRequest $request): RegisteredUserResource
     {
         $fields = $request->validated();
         $user = User::create($fields);
@@ -35,10 +36,9 @@ class AuthController extends Controller
     }
 
     #[Endpoint('Login a user', 'Authenticates a user and returns an authentication token.')]
-    public function login(LoginRequest $request)
+    public function login(LoginRequest $request): JsonResponse
     {
         $fields = $request->validated();
-
         if (! auth()->attempt($fields)) {
             return response()->json([
                 'status' => 'error',

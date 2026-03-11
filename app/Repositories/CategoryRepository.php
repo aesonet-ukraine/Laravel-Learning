@@ -6,30 +6,28 @@ use App\Http\Requests\PaginationRequest;
 use App\Models\Category;
 use App\Repositories\Contract\CategoryRepositoryContract;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
 
-class CategoryRepository implements CategoryRepositoryContract
+/**
+ * @template TModel of Model
+ */
+class CategoryRepository extends Repository implements CategoryRepositoryContract
 {
     /**
      * @return LengthAwarePaginator<int, Category>
      */
     public function paginate(PaginationRequest $request): LengthAwarePaginator
     {
-        $data = $request->validated();
+        $this->setData($request->validated());
 
         $query = Category::query()
-            ->when(isset($data['trashed']) && $data['trashed'],
-                fn ($query) => $query->withTrashed()
-                    ->whereNotNull('deleted_at')
-            )
             ->with(['parent', 'children'])
             ->withCount('products');
-        if (! empty($data['filters'])) {
-            $this->applyFilters($query, $data['filters']);
-        }
-        if (! empty($data['sort'])) {
-            $this->applySorting($query, $data['sort']);
-        }
+
+        $this->trashed($query);
+        $this->applySorting($query);
+        $this->applyFilters($query);
 
         return $query->paginate(
             $request->get('per_page', 15),
@@ -38,47 +36,35 @@ class CategoryRepository implements CategoryRepositoryContract
     }
 
     /**
-     * @param  Builder<Category>  $query
-     * @param  array<string, mixed>  $filters
+     * @param  Builder<TModel>  $query
      */
-    private function applyFilters(Builder $query, array $filters): void
+    protected function applyFilters(Builder $query): void
     {
-        foreach ($filters as $filter) {
-            if (! array_key_exists('key', $filters)) {
-                continue;
-            }
+        if (! empty($this->data['filters'])) {
+            foreach ($this->data['filters'] as $filter) {
+                [$key, $operator, $value] = $this->destructFilters($filter);
 
-            switch ($filter['key']) {
-                case 'parent':
-                    if ($filter['value'] === '1') {
-                        $query->whereNotNull('parent_id');
-                    } else {
-                        $query->whereNull('parent_id');
-                    }
-                    break;
-                case 'children':
-                    if ($filter['value'] === '1') {
-                        $query->has('children');
-                    } else {
-                        $query->doesntHave('children');
-                    }
-                    break;
-                case 'product_count':
-                    $query->has('products', $filter['operator'], $filter['value']);
-                    break;
-                default: $query->where($filter['key'], $filter['operator'], $filter['value']);
+                switch ($key) {
+                    case 'parent':
+                        if ($value === '1') {
+                            $query->whereNotNull('parent_id');
+                        } else {
+                            $query->whereNull('parent_id');
+                        }
+                        break;
+                    case 'children':
+                        if ($value === '1') {
+                            $query->has('children');
+                        } else {
+                            $query->doesntHave('children');
+                        }
+                        break;
+                    case 'product_count':
+                        $query->has('products', $operator, $value);
+                        break;
+                    default: $query->where($key, $operator, $value);
+                }
             }
-        }
-    }
-
-    /**
-     * @param  Builder<Category>  $query
-     * @param  array<int, array{key: string, direction: string}>  $sorts
-     */
-    private function applySorting(Builder $query, array $sorts): void
-    {
-        foreach ($sorts as $sort) {
-            $query->orderBy($sort['key'], $sort['direction']);
         }
     }
 }
