@@ -419,22 +419,28 @@ class ProductProvider extends Base
         return $out;
     }
 
-    public function generateThumbnail(string $slug): string
+    public function generateThumbnail(string $slug): string|bool
     {
         $dirName = "faker/products/$slug";
         $faker = Factory::create();
         $faker->addProvider(new FakerPicsumImagesProvider($faker));
 
-        if (! Storage::disk('public')->exists($dirName)) {
-            Storage::disk('public')->createDirectory($dirName);
+        if (! Storage::exists($dirName)) {
+            Storage::makeDirectory($dirName);
         }
+        try {
+            file_put_contents(
+                Storage::path($dirName."/$slug.jpg"),
+                file_get_contents($faker->imageUrl())
+            );
 
-        /**
-         * @var FakerPicsumImagesProvider $faker
-         */
-        return $dirName.'/'.$faker->image(
-            dir: Storage::disk('public')->path($dirName),
-            isFullPath: false
-        );
+            return $dirName."/$slug.jpg";
+        } catch (\Throwable $throwable) {
+            logs()->error('[generateThumbnail::false]: '.$throwable->getMessage(), [
+                'slug' => $slug,
+            ]);
+
+            return false;
+        }
     }
 }
